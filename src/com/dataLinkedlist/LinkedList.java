@@ -1,112 +1,142 @@
+
 package com.dataLinkedlist;
 
 
 /*
  * This is node class for data and next node
  */
-class Node {
+class Node<E> {
 
     /*
-     * Node Class
+     *  Data Stored in each Node of the Linked List
      */
-    int data;
-    Node next;
+    E data;
 
     /*
-     * parameterized constructor
+     * Pointer adding to the next node in the Linked List
      */
-    public Node(int data) {
-        super();
+    Node<E> next;
+
+    /*
+     Node class constructor
+     */
+    Node(E data) {
         this.data = data;
-        this.next = null;
+    }
+}
+
+class LinkedLists<E> {
+
+    // Points to the head of the Linked
+    // List i.e the first element
+    Node<E> head = null;
+    int size = 0;
+
+    // Addition of elements to the tail of the Linked List
+    public void add(E element)
+    {
+        // Checks whether the head is created else creates a
+        // new one
+        if (head == null) {
+            head = new Node<>(element);
+            size++;
+            return;
+        }
+
+
+        // Node to be added at tail of the Linked List
+        Node<E> add = new Node<>(element);
+
+        // Storing the instance of the
+        // head pointer
+        Node<E> temp = head;
+
+        // The while loop for taking to the tail of the Linked list
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        // New Node is added at the tail of
+        // the Linked List
+        temp.next = add;
+
+        // Size of the Linked List is incremented as
+        // the elements are added
+        size++;
+    }
+
+    /*
+     Searches the Linked List for the given element
+     */
+    public int search(E element)
+    {
+
+        if (head == null) {
+            return -1;
+        }
+
+        int index = 1;
+        Node<E> temp = head;
+
+        /*
+        While loop is used to search the entire Linked List
+         */
+
+        while (temp != null) {
+
+            /*
+             Returns the index of that particular element,
+             */
+
+            if (temp.data == element) {
+                return index;
+            }
+
+            // Gradually incrementing the index
+            index++;
+            temp = temp.next;
+        }
+
+
+        return -1;
     }
 }
 
 /*
- * Class to define linked list operations
+ * This is our main class
  */
-class LinkedListNew {
 
-    /*
-     *To add node to linked list
-     */
-    public Node addNode(int data, Node head) {
-
-        Node newNode = new Node(data);
-
-        if (head == null) {
-            head = newNode;
-
-        } else {
-            Node temp = head;
-            while (temp.next != null) {
-                temp = temp.next;
-            }
-            temp.next = newNode;
-        }
-        return head;
-    }
-
-    /*
-     * To delete last node of linked list
-     */
-    public void popLast(Node head) {
-        if (head == null) {
-            System.out.println("Linked list is empty");
-        }
-        if (head.next == null) {
-            head = null;
-        }
-        Node secondLast = head;
-        Node lastNode = head.next;
-
-        while (lastNode.next != null) {
-            lastNode = lastNode.next;
-            secondLast = secondLast.next;
-
-        }
-        secondLast.next = null;
-
-    }
-
-    /*
-     * To display linked list
-     */
-    public void printLinkedList(Node head) {
-        if (head == null) {
-            System.out.print("LinkedList is empty");
-        } else {
-            Node temp = head;
-            while (temp != null) {
-                System.out.print(temp.data + " -> ");
-                temp = temp.next;
-            }
-        }
-    }
-}
-
-/*
- * This is main class of program
- */
 public class LinkedList {
-
-    /**
-     * This is main method and starting point of program
-     *
-     * @param args
+    /*
+    Main Method
      */
 
     public static void main(String[] args) {
 
-        LinkedListNew obj = new LinkedListNew();
+        /*
+         * Initializing the Linked List
+         */
+        LinkedLists<Integer> obj = new LinkedLists<>();
 
-        Node head = obj.addNode(56, null);
-        obj.addNode(30, head);
-        obj.addNode(70, head);
+        // Adding elements to the Linked List
+        obj.add(56);
+        obj.add(30);
+        obj.add(70);
 
-        obj.popLast(head);
 
-        obj.printLinkedList(head);
+        /*
+         Element to be searched in the inked list
+         */
+        int element = 30;
+
+        /*Searching the Linked List
+        */
+        int ans = obj.search(30);
+
+        if (ans == -1) {
+            System.out.println("Element not found");
+        } else
+            System.out.println("Element found at " + ans);
     }
 }
 
