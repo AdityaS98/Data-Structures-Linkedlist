@@ -4,73 +4,38 @@ class Node {
 
     int data;
     Node next;
-
     public Node(int data) {
+        super();
         this.data = data;
         this.next = null;
     }
+}
+class LinkedListNewUpdated{
 
     /*
-     * Represent the head and tail of the singly linked list
+     * To add element at end of list
      */
-    public Node head = null;
 
-    /*
-     * addAtStart() will add a new node to the beginning of the list
-     */
-    public void addAtStart(int data) {
-        /*
-         * Create a new node
-         */
+    public Node addNode(int data, Node head){
+
         Node newNode = new Node(data);
 
-        /*
-         * Checks if the list is empty
-         */
-        if(head == null) {
-            /*
-             * If list is empty, both head and tail will point to new node
-             */
+        if (head == null) {
             head = newNode;
 
-        }
-        else {
-            /*
-             * Node temp will point to head
-             */
+        } else {
             Node temp = head;
-            /*
-             * newNode will become new head of the list
-             */
-            head = newNode;
-            /*
-             * Node temp(previous head) will be added after new head
-             */
-            head.next = temp;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
         }
+        return head;
     }
 
     /*
-     * display() will display all the nodes present in the list
+     * To display linked list
      */
-    public void display() {
-        /*
-         * Node current will point to head
-         */
-        Node current = head;
-        if(head == null) {
-            System.out.println("List is empty");
-            return;
-        }
-        System.out.println("Adding nodes to the start of the list: ");
-        while(current != null) {
-            //Prints each node by incrementing pointer
-            System.out.print(current.data + "->");
-            current = current.next;
-        }
-        System.out.println();
-    }
-
     public void printLinkedList(Node head) {
         if (head == null) {
             System.out.print("LinkedList is empty");
@@ -84,9 +49,6 @@ class Node {
     }
 }
 
-/*
- * This is main class of our program
- */
 public class StructureLinkedList {
     /*
      * This is the main function of our program
@@ -97,17 +59,9 @@ public class StructureLinkedList {
          */
         StructureLinkedList obj = new StructureLinkedList();
 
-        //Adding 70 to the list
-        obj.addAtStart(70);
-        obj.display();
+        obj.addNode(30,head);
+       obj.addNode(70, head);
 
-        //Adding 30 to the list
-        obj.addAtStart(30);
-        obj.display();
-
-        //Adding 56 to the list
-        obj.addAtStart(56);
-        obj.display();
+      obj.printLinkedList(head);
     }
-
 }
