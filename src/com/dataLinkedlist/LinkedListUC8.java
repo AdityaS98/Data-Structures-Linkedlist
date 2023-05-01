@@ -2,15 +2,15 @@
 package com.dataLinkedlist;
 
 
+import jdk.internal.util.xml.impl.Input;
+
 /*
  * This is node class
  */
 class Node<E> {
     E data;
 
-    /*
-     * Pointer to the next node in the Linked List
-     */
+
     Node<E> next;
 
     /*
@@ -42,9 +42,10 @@ class LinkedList8<E> {
         // the tail of the Linked List
         Node<E> add = new Node<>(element);
 
-        // Storing the instance of the
-        // head pointer
-        Node<E> temp = head;
+
+        Node<E> temp;
+        temp = null;
+        temp = head;
 
         // The while loop takes us to the tail of the Linked
         // List
@@ -93,7 +94,7 @@ class LinkedList8<E> {
         return -1;
     }
 
-    public <obj> void insertPosition(int pos, int data) {
+    public void insertPosition(int pos, int data) {
         Node obj = new Node(data);
         obj.data = data;
         obj.next = null;
@@ -107,8 +108,11 @@ class LinkedList8<E> {
             obj.next = head;
             head = obj;
             size++;
-        } else {
+        }
+
+        else {
             obj temp = head;
+            temp=null;
 
             // traverse till the current (pos-1)th node
             while (--pos > 1) {
@@ -123,7 +127,7 @@ class LinkedList8<E> {
     public void display() {
         System.out.print("Linked List : ");
 
-        Node8 node = head;
+        Node node = head;
         // as linked list will end when Node is Null
         while (node != null) {
             System.out.print(node.data + " ");
@@ -141,7 +145,7 @@ public class LinkedList {
         /*
          * Initializing the Linked List
          */
-        LinkedList<Integer> obj = new LinkedList<>();
+        LinkedList8<Integer> obj = new LinkedList8<>();
 
         /*
          * Adding elements to the Linked List
@@ -155,16 +159,12 @@ public class LinkedList {
          * Element to be searched
          */
         int element = 30;
-        int position = obj.search(element) + 1;
+        int position = obj.search(element)+1;
 
 
-        obj.insertPosition(position, 40);
+        obj.insertPosition(position,40);
 
 
         obj.display();
     }
 }
-
-
-
-
