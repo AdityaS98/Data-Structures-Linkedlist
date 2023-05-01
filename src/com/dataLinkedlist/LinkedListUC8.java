@@ -1,70 +1,52 @@
 
 package com.dataLinkedlist;
 
-
-import jdk.internal.util.xml.impl.Input;
-
-/*
- * This is node class
- */
 class Node<E> {
+
+
     E data;
 
 
     Node<E> next;
 
-    /*
-     *  Node class constructor used to initializes the data in each Node
-     */
+
     Node(E data) {
         this.data = data;
     }
 }
 
-class LinkedList8<E> {
+class LinkedList<E> {
 
-    // Points to the head of the Linked
-    // List i.e the first element
+
     Node<E> head = null;
     int size = 0;
 
-    // Addition of elements to the tail of the Linked List
+
     public void add(E element) {
-        // Checks whether the head is created else creates a
-        // new one
+
         if (head == null) {
             head = new Node<>(element);
             size++;
             return;
         }
 
-        // The Node which needs to be added at
-        // the tail of the Linked List
         Node<E> add = new Node<>(element);
 
+        Node<E> temp = head;
 
-        Node<E> temp;
-        temp = null;
-        temp = head;
 
-        // The while loop takes us to the tail of the Linked
-        // List
         while (temp.next != null) {
             temp = temp.next;
         }
 
-        // New Node is added at the tail of
-        // the Linked List
+
         temp.next = add;
 
-        // Size of the Linked List is incremented as
-        // the elements are added
+
         size++;
     }
 
-    // Searches the Linked List for the given element and
-    // returns it's particular index if found else returns
-    // -1
+
     public int search(E element) {
 
         if (head == null) {
@@ -74,23 +56,16 @@ class LinkedList8<E> {
         int index = 1;
         Node<E> temp = head;
 
-        // While loop is used to search the entire Linked
-        // List starting from the tail
-        while (temp != null) {
 
-            // Returns the index of that particular element,
-            // if found.
-            if (temp.data == element) {
+        while (temp != null) {
+    if (temp.data == element) {
                 return index;
             }
 
-            // Gradually increases index while
-            // traversing through the Linked List
             index++;
             temp = temp.next;
         }
 
-        // Returns -1 if the element is not found
         return -1;
     }
 
@@ -99,11 +74,11 @@ class LinkedList8<E> {
         obj.data = data;
         obj.next = null;
 
-        // Invalid positions
+        // Invalid position
         if (pos < 1 || pos > size + 1)
-            System.out.println("Invalid\n");
+            System.out.println("Invalid");
 
-            // inserting first node
+
         else if (pos == 1) {
             obj.next = head;
             head = obj;
@@ -112,9 +87,7 @@ class LinkedList8<E> {
 
         else {
             obj temp = head;
-            temp=null;
 
-            // traverse till the current (pos-1)th node
             while (--pos > 1) {
                 temp = temp.next;
             }
@@ -125,10 +98,9 @@ class LinkedList8<E> {
     }
 
     public void display() {
-        System.out.print("Linked List : ");
+        System.out.print("Linked List is as follows : ");
 
         Node node = head;
-        // as linked list will end when Node is Null
         while (node != null) {
             System.out.print(node.data + " ");
             node = node.next;
@@ -138,33 +110,33 @@ class LinkedList8<E> {
 
 }
 
-public class LinkedList {
+public class LinkedLists {
 
     public static void main(String[] args) {
 
         /*
          * Initializing the Linked List
          */
-        LinkedList8<Integer> obj = new LinkedList8<>();
+        LinkedLists<Integer> ref = new LinkedLists<>();
 
         /*
          * Adding elements to the Linked List
          */
-        obj.add(56);
-        obj.add(30);
-        obj.add(70);
+        ref.add(56);
+        ref.add(30);
+        ref.add(70);
 
 
         /*
          * Element to be searched
          */
         int element = 30;
-        int position = obj.search(element)+1;
+        int position = ref.search(element)+1;
 
 
-        obj.insertPosition(position,40);
+        ref.insertPosition(position,40);
 
 
-        obj.display();
+        ref.display();
     }
 }
