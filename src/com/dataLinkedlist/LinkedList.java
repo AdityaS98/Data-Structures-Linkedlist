@@ -4,39 +4,33 @@ package com.dataLinkedlist;
 /*
  * This is node class for data and next node
  */
-class LinkedListNew {
-    Node head;
+class Node {
 
     /*
      * Node Class
      */
-    class Node {
-        int data;
-        Node next;
-    /* Declaring Constructor
-     */
-        Node(int x)
-        {
-            data = x;
-            next = null;
-        }
-    }
-    /* Method to delete the elements
-    */
-    public void deleteStart() {
-        if (head == null) {
-            System.out.println("List is empty, not possible to delete");
-            return;
-        }
+    int data;
+    Node next;
 
-        System.out.println("Deleted: " + head.data);
-        /*move head to next node
-         */
-        head = head.next;
-    }
-    /*Method to insert the node
+    /*
+     * parameterized constructor
      */
-    public Node insert(int data) {
+    public Node(int data) {
+        super();
+        this.data = data;
+        this.next = null;
+    }
+}
+
+/*
+ * Class to define linked list operations
+ */
+class LinkedListNew {
+
+    /*
+     *To add node to linked list
+     */
+    public Node addNode(int data, Node head) {
 
         Node newNode = new Node(data);
 
@@ -50,35 +44,69 @@ class LinkedListNew {
             }
             temp.next = newNode;
         }
-
         return head;
     }
-/*Method to display the changes
- */
-    public void display() {
-        Node node = head;
-        // as linked list will end when Node reaches Null
-        while (node != null) {
-            System.out.print(node.data + "->");
-            node = node.next;
+
+    /*
+     * To delete last node of linked list
+     */
+    public void popLast(Node head) {
+        if (head == null) {
+            System.out.println("Linked list is empty");
         }
-        System.out.println("");
+        if (head.next == null) {
+            head = null;
+        }
+        Node secondLast = head;
+        Node lastNode = head.next;
+
+        while (lastNode.next != null) {
+            lastNode = lastNode.next;
+            secondLast = secondLast.next;
+
+        }
+        secondLast.next = null;
+
+    }
+
+    /*
+     * To display linked list
+     */
+    public void printLinkedList(Node head) {
+        if (head == null) {
+            System.out.print("LinkedList is empty");
+        } else {
+            Node temp = head;
+            while (temp != null) {
+                System.out.print(temp.data + " -> ");
+                temp = temp.next;
+            }
+        }
     }
 }
-//Main class of our program
+
+/*
+ * This is main class of program
+ */
 public class LinkedList {
-// Main method of the program
+
+    /**
+     * This is main method and starting point of program
+     *
+     * @param args
+     */
+
     public static void main(String[] args) {
 
-        LinkedListNew list5 = new LinkedListNew();
+        LinkedListNew obj = new LinkedListNew();
 
-        list5.insert(56);
-        list5.insert(30);
-        list5.insert(70);
+        Node head = obj.addNode(56, null);
+        obj.addNode(30, head);
+        obj.addNode(70, head);
 
-        list5.display();
+        obj.popLast(head);
 
-        list5.deleteStart();
-        list5.display();
+        obj.printLinkedList(head);
     }
 }
+
